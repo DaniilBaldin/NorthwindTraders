@@ -8,7 +8,7 @@ Back end part for Northwind Traders, using TypeScript and MySQL.
 Get orders from database with pagination. Limit = 20 items on page. Page in query params.
 
 // method: GET - https://northwind-traders-app.herokuapp.com/order?id=(1..n)
-Get order info from database by id. Id in query params.
+Get order info and products in order from database by id. Id in query params.
 
 
                 PRODUCTS

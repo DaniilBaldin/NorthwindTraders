@@ -5,6 +5,7 @@ import orders from '../../models/orders';
 
 const getOrder: RequestHandler = async (req, res) => {
     const OrderID: any = req.query.id;
+    const orderDetails = await orders.getOrderDetails(OrderID);
     orders
         .getOrder(OrderID)
         .then((result) => {
@@ -18,7 +19,8 @@ const getOrder: RequestHandler = async (req, res) => {
                 });
             } else {
                 res.status(200).json({
-                    data: resultParsed[0],
+                    order: resultParsed[0],
+                    products: orderDetails[0],
                     success: true,
                 });
             }
