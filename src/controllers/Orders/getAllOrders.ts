@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RequestHandler } from 'express';
 
-import suppliers from '../../models/suppliers';
+import orders from '../../models/orders';
 
-const getAllSuppliers: RequestHandler = async (req, res) => {
+const getAllOrders: RequestHandler = async (req, res) => {
     const page: any = req.query.page;
     const limit = 20;
     const offset = (page - 1) * limit;
-    const totalLength = await suppliers.getAll().then((result) => {
+    const totalLength = await orders.getAll().then((result) => {
         const resultParsed = JSON.parse(JSON.stringify(result[0]));
         return resultParsed.length;
     });
     const totalPages = Math.ceil(totalLength / limit);
     console.log(totalPages);
-    suppliers
-        .getAllSuppliers(limit, offset)
+    orders
+        .getAllOrders(limit, offset)
         .then((result) => {
             res.status(200).json({
                 data: {
@@ -22,7 +22,7 @@ const getAllSuppliers: RequestHandler = async (req, res) => {
                     page: parseInt(page),
                     pages: totalPages,
                     hasNextPage: limit * page < totalLength,
-                    suppliers: result[0],
+                    orders: result[0],
                 },
                 success: true,
             });
@@ -37,4 +37,4 @@ const getAllSuppliers: RequestHandler = async (req, res) => {
         });
 };
 
-export default getAllSuppliers;
+export default getAllOrders;

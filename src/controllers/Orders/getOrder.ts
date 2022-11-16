@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RequestHandler } from 'express';
 
-import suppliers from '../../models/suppliers';
+import orders from '../../models/orders';
 
-const getSupplier: RequestHandler = async (req, res) => {
-    const supplierID: any = req.query.id;
-    suppliers
-        .getSupplier(supplierID)
+const getOrder: RequestHandler = async (req, res) => {
+    const OrderID: any = req.query.id;
+    orders
+        .getOrder(OrderID)
         .then((result) => {
             const resultParsed = JSON.parse(JSON.stringify(result[0]));
             if (!resultParsed[0]) {
                 res.json({
                     error: {
-                        message: 'No suppliers found.',
+                        message: 'No orders found.',
                     },
                     success: false,
                 });
@@ -33,4 +33,4 @@ const getSupplier: RequestHandler = async (req, res) => {
         });
 };
 
-export default getSupplier;
+export default getOrder;

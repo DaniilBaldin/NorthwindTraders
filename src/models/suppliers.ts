@@ -48,6 +48,10 @@ const suppliers = class Suppliers {
         return db.execute(`SELECT * FROM suppliers`);
     }
 
+    static getAllSuppliers(limit: number, offset: number) {
+        return db.execute(`SELECT * FROM suppliers LIMIT ${limit} OFFSET ${offset}`);
+    }
+
     static getSupplier(SupplierID: string) {
         return db.execute(`SELECT * FROM suppliers WHERE suppliers.SupplierID = ?`, [SupplierID]);
     }

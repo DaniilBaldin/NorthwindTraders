@@ -13,7 +13,7 @@ const uploadCSV = (file: any) => {
         })
         .on('end', () => {
             csvData.shift();
-            const query = `INSERT INTO regions (RegionID, RegionDescription) VALUES ?`;
+            const query = `INSERT INTO shippers (ShipperID, CompanyName, Phone) VALUES ?`;
             db.query(query, [csvData]);
             fs.unlinkSync(file);
         });

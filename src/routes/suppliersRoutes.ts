@@ -7,7 +7,7 @@ import getSupplier from '../controllers/Suppliers/getSupplier';
 const suppliersRouter = Router();
 
 suppliersRouter.get('/suppliers', getAllSuppliers);
-suppliersRouter.get('/supplier/:id', getSupplier);
+suppliersRouter.get('/supplier', getSupplier);
 
 suppliersRouter.use(bodyParser.json());
 
