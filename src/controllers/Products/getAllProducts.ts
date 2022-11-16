@@ -12,20 +12,29 @@ const getAllProducts: RequestHandler = async (req, res) => {
         return resultParsed.length;
     });
     const totalPages = Math.ceil(totalLength / limit);
-    console.log(totalPages);
     products
         .getAllProducts(limit, offset)
         .then((result) => {
-            res.status(200).json({
-                data: {
-                    items: limit,
-                    page: parseInt(page),
-                    pages: totalPages,
-                    hasNextPage: limit * page < totalLength,
-                    products: result[0],
-                },
-                success: true,
-            });
+            const resultParsed = JSON.parse(JSON.stringify(result[0]));
+            if (!resultParsed[0]) {
+                res.json({
+                    error: {
+                        message: 'No products found.',
+                    },
+                    success: false,
+                });
+            } else {
+                res.status(200).json({
+                    data: {
+                        items: limit,
+                        page: parseInt(page),
+                        pages: totalPages,
+                        hasNextPage: limit * page < totalLength,
+                        products: result[0],
+                    },
+                    success: true,
+                });
+            }
         })
         .catch((err) => {
             res.json({

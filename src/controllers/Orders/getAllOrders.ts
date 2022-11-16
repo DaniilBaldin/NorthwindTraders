@@ -16,16 +16,26 @@ const getAllOrders: RequestHandler = async (req, res) => {
     orders
         .getAllOrders(limit, offset)
         .then((result) => {
-            res.status(200).json({
-                data: {
-                    items: limit,
-                    page: parseInt(page),
-                    pages: totalPages,
-                    hasNextPage: limit * page < totalLength,
-                    orders: result[0],
-                },
-                success: true,
-            });
+            const resultParsed = JSON.parse(JSON.stringify(result[0]));
+            if (!resultParsed[0]) {
+                res.json({
+                    error: {
+                        message: 'No orders found.',
+                    },
+                    success: false,
+                });
+            } else {
+                res.status(200).json({
+                    data: {
+                        items: limit,
+                        page: parseInt(page),
+                        pages: totalPages,
+                        hasNextPage: limit * page < totalLength,
+                        orders: result[0],
+                    },
+                    success: true,
+                });
+            }
         })
         .catch((err) => {
             res.json({
