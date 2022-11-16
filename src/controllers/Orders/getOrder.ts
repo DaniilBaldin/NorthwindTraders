@@ -19,8 +19,10 @@ const getOrder: RequestHandler = async (req, res) => {
                 });
             } else {
                 res.status(200).json({
-                    order: resultParsed[0],
-                    products: orderDetails[0],
+                    data: {
+                        order: resultParsed[0],
+                        products: orderDetails[0],
+                    },
                     success: true,
                 });
             }
