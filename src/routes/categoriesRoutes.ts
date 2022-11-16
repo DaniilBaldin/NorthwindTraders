@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser';
 
-import getAllCategories from '../controllers/getAllCategories';
+import getAllCategories from '../controllers/Categories/getAllCategories';
 
 const categoriesRouter = Router();
 

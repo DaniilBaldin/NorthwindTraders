@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 
-import Categories from '../models/categories';
+import Categories from '../../models/categories';
 
 const getAllCategories: RequestHandler = async (req, res) => {
     try {
