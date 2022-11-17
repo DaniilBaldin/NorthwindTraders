@@ -39,7 +39,7 @@ const products = class Products {
     }
 
     static getAll() {
-        return db.execute(`SELECT * FROM products`);
+        return db.execute(`SELECT COUNT(1) as total FROM products`);
     }
 
     static getAllProducts(limit: number, offset: number) {

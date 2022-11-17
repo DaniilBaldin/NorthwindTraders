@@ -9,10 +9,9 @@ const getAllOrders: RequestHandler = async (req, res) => {
     const offset = (page - 1) * limit;
     const totalLength = await orders.getAll().then((result) => {
         const resultParsed = JSON.parse(JSON.stringify(result[0]));
-        return resultParsed.length;
+        return resultParsed[0].total;
     });
     const totalPages = Math.ceil(totalLength / limit);
-    console.log(totalPages);
     orders
         .getAllOrders(limit, offset)
         .then((result) => {

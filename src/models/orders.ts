@@ -52,7 +52,7 @@ const products = class Products {
     }
 
     static getAll() {
-        return db.execute(`SELECT * FROM orders`);
+        return db.execute(`SELECT COUNT(1) as total FROM orders`);
     }
 
     static getAllOrders(limit: number, offset: number) {

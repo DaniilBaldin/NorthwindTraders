@@ -45,7 +45,7 @@ const suppliers = class Suppliers {
     }
 
     static getAll() {
-        return db.execute(`SELECT * FROM suppliers`);
+        return db.execute(`SELECT COUNT(1) as total FROM suppliers`);
     }
 
     static getAllSuppliers(limit: number, offset: number) {
