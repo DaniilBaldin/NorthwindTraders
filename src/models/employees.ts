@@ -58,7 +58,7 @@ const employees = class Employees {
     }
 
     static getAll() {
-        return db.execute(`SELECT COUNT(1) as total FROM orders`);
+        return db.execute(`SELECT COUNT(1) as total FROM employees`);
     }
 
     static getAllEmployees(limit: number, offset: number) {
