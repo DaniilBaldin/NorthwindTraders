@@ -17,7 +17,7 @@ const getAllOrders: RequestHandler = async (req, res) => {
         .then((result) => {
             const resultParsed = JSON.parse(JSON.stringify(result[0]));
             if (!resultParsed[0]) {
-                res.json({
+                res.status(404).json({
                     error: {
                         message: 'No orders found.',
                     },
