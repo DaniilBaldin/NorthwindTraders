@@ -7,6 +7,7 @@ dotenv.config();
 
 import categoriesRouter from './routes/categoriesRoutes';
 import suppliersRouter from './routes/suppliersRoutes';
+import employeesRouter from './routes/employeesRoutes';
 import productsRouter from './routes/productsRoutes';
 import ordersRouter from './routes/ordersRoutes';
 import uploadRouter from './routes/uploadRoutes';
@@ -52,7 +53,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.json());
-app.use('/', categoriesRouter, suppliersRouter, productsRouter, ordersRouter, uploadRouter);
+app.use('/', categoriesRouter, suppliersRouter, productsRouter, ordersRouter, uploadRouter, employeesRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
