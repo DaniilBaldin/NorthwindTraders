@@ -45,3 +45,9 @@ Get employees from database with pagination. Limit = 20 items on page. Page(from
 
 // method: GET - https://northwind-traders-app.herokuapp.com/customer?id=(1...n)
 Get employee info from database by id. Customer Id in query params.
+
+
+                SEARCH
+
+// method: GET - https://northwind-traders-app.herokuapp.com/search?q=*search_request*&table=*table_name*
+Search from customers or products. Search request(any length) and table name(customers or products) in query params.
