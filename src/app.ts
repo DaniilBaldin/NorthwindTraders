@@ -12,6 +12,7 @@ import employeesRouter from './routes/employeesRoutes';
 import productsRouter from './routes/productsRoutes';
 import ordersRouter from './routes/ordersRoutes';
 import uploadRouter from './routes/uploadRoutes';
+import searchRouter from './routes/searchRoutes';
 
 const PORT = process.env.PORT || 3000;
 
@@ -62,7 +63,8 @@ app.use(
     ordersRouter,
     uploadRouter,
     employeesRouter,
-    customersRouter
+    customersRouter,
+    searchRouter
 );
 
 app.listen(PORT, () => {

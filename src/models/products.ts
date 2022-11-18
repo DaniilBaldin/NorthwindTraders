@@ -48,7 +48,7 @@ const products = class Products {
 
     static getProduct(ProductID: string) {
         return db.execute(
-            `SELECT ProductID, ProductName, products.SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued, suppliers.CompanyName AS SupplierName FROM products, suppliers WHERE products.ProductID = ? AND suppliers.SupplierID =products.SupplierID`,
+            `SELECT ProductID, ProductName, products.SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued, suppliers.CompanyName AS SupplierName FROM products, suppliers WHERE products.ProductID = ? AND suppliers.SupplierID = products.SupplierID`,
             [ProductID]
         );
     }
