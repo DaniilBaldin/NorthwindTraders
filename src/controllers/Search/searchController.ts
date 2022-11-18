@@ -59,6 +59,13 @@ const searchController: RequestHandler = async (req, res) => {
                     success: false,
                 });
             });
+    } else {
+        res.json({
+            error: {
+                message: 'Incorrect table name!',
+            },
+            success: false,
+        });
     }
 };
 
