@@ -7,7 +7,7 @@ const searchController: RequestHandler = async (req, res) => {
     const limit = 50;
     const search: any = req.query.q;
     const table = req.query.table;
-    if (table === 'products') {
+    if (table === 'products' && search) {
         SearchFrom.searchProducts(search, limit)
             .then((result) => {
                 const resultParsed = JSON.parse(JSON.stringify(result[0]));
@@ -33,7 +33,7 @@ const searchController: RequestHandler = async (req, res) => {
                     success: false,
                 });
             });
-    } else if (table === 'customers') {
+    } else if (table === 'customers' && search) {
         SearchFrom.searchCustomers(search, limit)
             .then((result) => {
                 const resultParsed = JSON.parse(JSON.stringify(result[0]));
@@ -59,6 +59,13 @@ const searchController: RequestHandler = async (req, res) => {
                     success: false,
                 });
             });
+    } else if (!search) {
+        res.json({
+            error: {
+                message: 'Empty search request.',
+            },
+            success: false,
+        });
     } else {
         res.json({
             error: {
