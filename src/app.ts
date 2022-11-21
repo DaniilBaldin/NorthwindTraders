@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../', '/public')));
+app.enable('trust proxy');
 
 app.use(bodyParser.json());
 app.use(
@@ -28,7 +29,7 @@ app.use(
     })
 );
 
-app.set('trust proxy', true);
+// app.set('trust proxy', true);
 
 app.use((req, res, next) => {
     res.setTimeout(10000);
