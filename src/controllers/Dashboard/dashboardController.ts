@@ -12,17 +12,17 @@ const URL = 'https://ipgeolocation.abstractapi.com/v1/?api_key=' + API_KEY;
 
 import logs from '../../models/logs';
 
-// const sendAPIRequest = async (ipAddress: any) => {
-//     const apiResponse = await axios.get(URL + '&ip_address=' + ipAddress);
-//     return apiResponse.data;
-// };
+const sendAPIRequest = async (ipAddress: any) => {
+    const apiResponse = await axios.get(URL + '&ip_address=' + ipAddress);
+    return apiResponse.data;
+};
 
 const dashboardController: RequestHandler = async (req, res) => {
     const ip = req.ip;
     console.log(ip);
     // const ipAddress = IP.address('public');
-    // const ipAddressInformation = await sendAPIRequest(ip);
-    // console.log(ipAddressInformation);
+    const ipAddressInformation = await sendAPIRequest(ip);
+    console.log(ipAddressInformation);
 
     // const options = {
     //     method: 'GET',
