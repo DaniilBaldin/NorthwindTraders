@@ -6,7 +6,6 @@ import path from 'path';
 dotenv.config({
     path: path.join(__dirname, '../', '/.env'),
 });
-import IP from 'ip';
 const API_KEY = '993fbdff21894ce68d4098491b66e5f7';
 const URL = 'https://ipgeolocation.abstractapi.com/v1/?api_key=' + API_KEY;
 
@@ -20,19 +19,8 @@ const sendAPIRequest = async (ipAddress: any) => {
 const dashboardController: RequestHandler = async (req, res) => {
     const ip = req.ip;
     console.log(ip);
-    // const ipAddress = IP.address('public');
     const ipAddressInformation = await sendAPIRequest(ip);
     console.log(ipAddressInformation);
-
-    // const options = {
-    //     method: 'GET',
-    //     url: ip,
-    //     headers: {
-    //         'X-RapidAPI-Key': process.env.RapidAPIKey,
-    //         'X-RapidAPI-Host': 'ip-geolocation-ipwhois-io.p.rapidapi.com',
-    //     },
-    // };
-    // const geoData = await axios.request(options);
     logs.getAllLogs()
         .then(async (result) => {
             const resultParsed = JSON.parse(JSON.stringify(result[0]));
@@ -55,7 +43,7 @@ const dashboardController: RequestHandler = async (req, res) => {
                 }
             });
             res.status(200).json({
-                // geoData: geoData,
+                geoData: ipAddressInformation,
                 data: {
                     select: select,
                     select_where: select_where,
