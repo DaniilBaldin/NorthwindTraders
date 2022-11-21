@@ -16,7 +16,7 @@ const dashboardController: RequestHandler = async (req, res) => {
         .get('https://ipgeolocation.abstractapi.com/v1/?api_key=993fbdff21894ce68d4098491b66e5f7')
         .then((response) => {
             console.log(response.data);
-            return response;
+            return response.data;
         })
         .catch((error) => {
             console.log(error);
