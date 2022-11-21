@@ -39,6 +39,10 @@ const logs = class Logs {
             [result_count, type, date, database_name, time_passed, query]
         );
     }
+
+    static getAllLogs() {
+        return db.execute('SELECT * FROM logs ORDER BY id DESC LIMIT 20');
+    }
 };
 
 export default logs;

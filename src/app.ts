@@ -13,6 +13,7 @@ import productsRouter from './routes/productsRoutes';
 import ordersRouter from './routes/ordersRoutes';
 import uploadRouter from './routes/uploadRoutes';
 import searchRouter from './routes/searchRoutes';
+import dashboardRouter from './routes/dashboardRoutes';
 
 const PORT = process.env.PORT || 3000;
 
@@ -26,6 +27,8 @@ app.use(
         extended: true,
     })
 );
+
+app.set('trust proxy', true);
 
 app.use((req, res, next) => {
     res.setTimeout(10000);
@@ -64,7 +67,8 @@ app.use(
     uploadRouter,
     employeesRouter,
     customersRouter,
-    searchRouter
+    searchRouter,
+    dashboardRouter
 );
 
 app.listen(PORT, () => {
