@@ -10,15 +10,26 @@ dotenv.config({
 import logs from '../../models/logs';
 
 const dashboardController: RequestHandler = async (req, res) => {
-    const options = {
-        method: 'GET',
-        url: 'http://ipwho.is/',
-        headers: {
-            'X-RapidAPI-Key': process.env.RapidAPIKey,
-            'X-RapidAPI-Host': 'ip-geolocation-ipwhois-io.p.rapidapi.com',
-        },
-    };
-    const geoData = await axios.request(options);
+    const ip = req.socket.remoteAddress;
+    console.log(ip);
+    const geoData = await axios
+        .get('https://ipgeolocation.abstractapi.com/v1/?api_key=993fbdff21894ce68d4098491b66e5f7')
+        .then((response) => {
+            console.log(response.data);
+            return response;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    // const options = {
+    //     method: 'GET',
+    //     url: ip,
+    //     headers: {
+    //         'X-RapidAPI-Key': process.env.RapidAPIKey,
+    //         'X-RapidAPI-Host': 'ip-geolocation-ipwhois-io.p.rapidapi.com',
+    //     },
+    // };
+    // const geoData = await axios.request(options);
     logs.getAllLogs()
         .then(async (result) => {
             const resultParsed = JSON.parse(JSON.stringify(result[0]));
@@ -41,7 +52,7 @@ const dashboardController: RequestHandler = async (req, res) => {
                 }
             });
             res.status(200).json({
-                geoData: geoData.data,
+                geoData: geoData,
                 data: {
                     select: select,
                     select_where: select_where,
