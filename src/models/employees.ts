@@ -73,13 +73,6 @@ const employees = class Employees {
             [EmployeeID]
         );
     }
-
-    // static getOrderDetails(OrderID: string) {
-    //     return db.execute(
-    //         `SELECT orderdetails.OrderID, orderdetails.Quantity, orderdetails.UnitPrice AS OrderUnitPrice, orderdetails.Discount, products.ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, products.UnitPrice AS ProductUnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued FROM products, orderdetails WHERE orderdetails.OrderID = ? AND orderdetails.ProductID = products.ProductID`,
-    //         [OrderID]
-    //     );
-    // }
 };
 
 export default employees;
