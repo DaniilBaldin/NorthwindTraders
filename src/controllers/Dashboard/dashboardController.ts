@@ -20,7 +20,7 @@ const sendAPIRequest = async (ipAddress: any) => {
 const dashboardController: RequestHandler = async (req, res) => {
     // const ip = req.socket.remoteAddress;
     // console.log(ip);
-    const ipAddress = IP.address();
+    const ipAddress = IP.address('public');
     const ipAddressInformation = await sendAPIRequest(ipAddress);
     console.log(ipAddressInformation);
 
