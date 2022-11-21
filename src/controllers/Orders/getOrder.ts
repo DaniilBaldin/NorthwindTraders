@@ -12,7 +12,7 @@ const getOrder: RequestHandler = async (req, res) => {
     const OrderID: any = req.query.id;
     const orderDetails = await orders.getOrderDetails(OrderID).then(async (result) => {
         const resultParsed = JSON.parse(JSON.stringify(result[0]));
-        const end = (new Date().valueOf() - start) / 1000;
+        const end = new Date().valueOf() - start + 'ms';
         const result_count = resultParsed.length;
         const type = 'select_where';
         const date = new Date().toISOString();
@@ -32,7 +32,7 @@ const getOrder: RequestHandler = async (req, res) => {
                     success: false,
                 });
             } else {
-                const end = (new Date().valueOf() - start) / 1000;
+                const end = new Date().valueOf() - start + 'ms';
                 const result_count = resultParsed.length;
                 const type = 'select_where';
                 const date = new Date().toISOString();

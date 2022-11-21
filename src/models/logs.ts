@@ -6,7 +6,7 @@ const logs = class Logs {
     type: string;
     date: string;
     database_name: string;
-    time_passed: number;
+    time_passed: string;
     query: string;
     constructor(
         id: string,
@@ -14,7 +14,7 @@ const logs = class Logs {
         type: string,
         date: string,
         database_name: string,
-        time_passed: number,
+        time_passed: string,
         query: string
     ) {
         this.id = id;
@@ -31,7 +31,7 @@ const logs = class Logs {
         type: string,
         date: string,
         database_name: string,
-        time_passed: number,
+        time_passed: string,
         query: string
     ) {
         return db.execute(

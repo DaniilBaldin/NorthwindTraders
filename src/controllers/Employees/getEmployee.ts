@@ -21,7 +21,7 @@ const getEmployee: RequestHandler = async (req, res) => {
                     success: false,
                 });
             } else {
-                const end = (new Date().valueOf() - start) / 1000;
+                const end = new Date().valueOf() - start + 'ms';
                 const result_count = resultParsed.length;
                 const type = 'select_left';
                 const date = new Date().toISOString();
