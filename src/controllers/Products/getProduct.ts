@@ -21,7 +21,7 @@ const getProduct: RequestHandler = async (req, res) => {
                     success: false,
                 });
             } else {
-                const end = new Date().valueOf() - start;
+                const end = (new Date().valueOf() - start) / 1000;
                 const result_count = resultParsed.length;
                 const type = 'select_where';
                 const date = new Date().toISOString();

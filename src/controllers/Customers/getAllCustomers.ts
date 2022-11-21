@@ -13,7 +13,7 @@ const getAllCustomers: RequestHandler = async (req, res) => {
     const limit = 20;
     const offset = (page - 1) * limit;
     const totalLength = await customers.getAll().then(async (result) => {
-        const end = new Date().valueOf() - start;
+        const end = (new Date().valueOf() - start) / 1000;
         const result_count = 1;
         const type = 'select';
         const date = new Date().toISOString();
@@ -35,7 +35,7 @@ const getAllCustomers: RequestHandler = async (req, res) => {
                     success: false,
                 });
             } else {
-                const end = new Date().valueOf() - start;
+                const end = (new Date().valueOf() - start) / 1000;
                 const result_count = resultParsed.length;
                 const type = 'select';
                 const date = new Date().toISOString();
