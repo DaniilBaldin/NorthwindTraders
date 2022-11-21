@@ -51,3 +51,9 @@ Get employee info from database by id. Customer Id in query params.
 
 // method: GET - https://northwind-traders-app.herokuapp.com/search?q=*search_request*&table=*table_name*
 Search from customers or products. Search request(any length) and table name(customers or products) in query params.
+
+                
+                DASHBOARD
+
+// method: GET - https://northwind-traders-app.herokuapp.com/dashboard
+Get users geolocation info, query results count and logs for 20 last query operations.

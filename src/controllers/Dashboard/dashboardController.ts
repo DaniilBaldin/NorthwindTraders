@@ -6,7 +6,7 @@ import path from 'path';
 dotenv.config({
     path: path.join(__dirname, '../', '/.env'),
 });
-const API_KEY = '993fbdff21894ce68d4098491b66e5f7';
+const API_KEY = process.env.API_KEY;
 const URL = 'https://ipgeolocation.abstractapi.com/v1/?api_key=' + API_KEY;
 
 import logs from '../../models/logs';
