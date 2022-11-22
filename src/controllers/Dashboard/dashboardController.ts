@@ -28,23 +28,28 @@ const dashboardController: RequestHandler = async (req, res) => {
             let select_where = 0;
             let select_left = 0;
             let result_count = 0;
+            let query_count = 0;
             resultParsed.forEach((e: any) => {
                 result_count = result_count + parseInt(e.result_count);
                 switch (true) {
                     case e.type === 'select':
                         select = select + 1;
+                        query_count = query_count + 1;
                         break;
                     case e.type === 'select_where':
                         select_where = select_where + 1;
+                        query_count = query_count + 1;
                         break;
                     case e.type === 'select_left':
                         select_left = select_left + 1;
+                        query_count = query_count + 1;
                         break;
                 }
             });
             res.status(200).json({
                 data: {
                     geoData: ipAddressInformation,
+                    query_count: query_count,
                     select: select,
                     select_where: select_where,
                     select_left: select_left,
