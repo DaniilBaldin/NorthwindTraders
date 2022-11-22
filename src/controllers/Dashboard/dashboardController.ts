@@ -43,8 +43,8 @@ const dashboardController: RequestHandler = async (req, res) => {
                 }
             });
             res.status(200).json({
-                geoData: ipAddressInformation,
                 data: {
+                    geoData: ipAddressInformation,
                     select: select,
                     select_where: select_where,
                     select_left: select_left,
