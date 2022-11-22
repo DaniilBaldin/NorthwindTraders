@@ -49,7 +49,7 @@ const dashboardController: RequestHandler = async (req, res) => {
                     select_where: select_where,
                     select_left: select_left,
                     result_count: result_count,
-                    logs: resultParsed.reverse(),
+                    logs: resultParsed,
                 },
                 success: true,
             });
