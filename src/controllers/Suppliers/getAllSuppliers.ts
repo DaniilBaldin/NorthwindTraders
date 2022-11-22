@@ -46,7 +46,7 @@ const getAllSuppliers: RequestHandler = async (req, res) => {
                         page: parseInt(page),
                         pages: totalPages,
                         hasNextPage: limit * page < totalLength,
-                        suppliers: result[0],
+                        suppliers: resultParsed,
                     },
                     success: true,
                 });

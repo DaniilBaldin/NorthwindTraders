@@ -28,9 +28,7 @@ const getEmployee: RequestHandler = async (req, res) => {
                 const database_name = 'heroku_6277cdda7c83006';
                 await logs.save(result_count, type, date, database_name, end, getEmployeeQuery);
                 res.status(200).json({
-                    data: {
-                        employee: resultParsed[0],
-                    },
+                    data: resultParsed[0],
                     success: true,
                 });
             }
