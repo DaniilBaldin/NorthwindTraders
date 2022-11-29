@@ -15,7 +15,7 @@ const searchFrom = class SearchFrom {
 
     static searchCustomers(search: string, limit: number) {
         return db.execute(
-            `SELECT CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax FROM customers WHERE CompanyName LIKE '%${search}$' OR ContactName LIKE '%${search}%' OR ContactTitle LIKE '%${search}%' OR Address LIKE '%${search}%' LIMIT ${limit}`
+            `SELECT CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax FROM customers WHERE CompanyName LIKE '%${search}%' OR ContactName LIKE '%${search}%' OR ContactTitle LIKE '%${search}%' OR Address LIKE '%${search}%' LIMIT ${limit}`
         );
     }
 };
