@@ -27,10 +27,20 @@ const getEmployee: RequestHandler = async (req, res) => {
                 const date = new Date().toISOString();
                 const database_name = 'heroku_6277cdda7c83006';
                 await logs.save(result_count, type, date, database_name, end, getEmployeeQuery);
-                res.status(200).json({
-                    data: resultParsed[0],
-                    success: true,
-                });
+                if (resultParsed[0].ReportsTo === 'null') {
+                    const person = resultParsed[0];
+                    delete person.ReportsTo;
+                    delete person.ReportId;
+                    res.status(200).json({
+                        data: person,
+                        success: true,
+                    });
+                } else {
+                    res.status(200).json({
+                        data: resultParsed[0],
+                        success: true,
+                    });
+                }
             }
         })
         .catch((err) => {
