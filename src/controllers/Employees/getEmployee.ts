@@ -31,6 +31,8 @@ const getEmployee: RequestHandler = async (req, res) => {
                     const person = resultParsed[0];
                     delete person.ReportsTo;
                     delete person.ReportId;
+                    delete person.ReportFirstName;
+                    delete person.ReportLastName;
                     res.status(200).json({
                         data: person,
                         success: true,
