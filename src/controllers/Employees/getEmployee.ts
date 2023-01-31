@@ -2,13 +2,13 @@
 import { RequestHandler } from 'express';
 
 import employees from '../../models/employees';
-import logs from '../../models/logs';
 import * as q from '../../utils/queries';
 
 const getEmployee: RequestHandler = async (req, res) => {
     const start = new Date().valueOf();
     const getEmployeeQuery = q.getEmployeeQuery;
     const EmployeeID: any = req.query.id;
+    const first: any = {};
     employees
         .getEmployee(EmployeeID)
         .then(async (result) => {
@@ -26,7 +26,11 @@ const getEmployee: RequestHandler = async (req, res) => {
                 const type = 'select_left';
                 const date = new Date().toISOString();
                 const database_name = 'heroku_6277cdda7c83006';
-                await logs.save(result_count, type, date, database_name, end, getEmployeeQuery);
+                first.type = type;
+                first.duration = end;
+                first.timestamp = date;
+                first.database = database_name;
+                first.query = getEmployeeQuery;
                 if (resultParsed[0].ReportsTo === 'null') {
                     const person = resultParsed[0];
                     delete person.ReportsTo;
@@ -34,12 +38,26 @@ const getEmployee: RequestHandler = async (req, res) => {
                     delete person.ReportFirstName;
                     delete person.ReportLastName;
                     res.status(200).json({
-                        data: person,
+                        data: {
+                            employee: person,
+                            stats: {
+                                queries: 1,
+                                results: result_count,
+                                logs: [first],
+                            },
+                        },
                         success: true,
                     });
                 } else {
                     res.status(200).json({
-                        data: resultParsed[0],
+                        data: {
+                            employee: resultParsed[0],
+                            stats: {
+                                queries: 1,
+                                results: result_count,
+                                logs: first,
+                            },
+                        },
                         success: true,
                     });
                 }

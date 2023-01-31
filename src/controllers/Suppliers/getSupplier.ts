@@ -2,13 +2,13 @@
 import { RequestHandler } from 'express';
 
 import suppliers from '../../models/suppliers';
-import logs from '../../models/logs';
 import * as q from '../../utils/queries';
 
 const getSupplier: RequestHandler = async (req, res) => {
     const start = new Date().valueOf();
     const getSupplierQuery = q.getSupplierQuery;
     const supplierID: any = req.query.id;
+    const first: any = {};
     suppliers
         .getSupplier(supplierID)
         .then(async (result) => {
@@ -26,9 +26,20 @@ const getSupplier: RequestHandler = async (req, res) => {
                 const type = 'select_where';
                 const date = new Date().toISOString();
                 const database_name = 'heroku_6277cdda7c83006';
-                await logs.save(result_count, type, date, database_name, end, getSupplierQuery);
+                first.type = type;
+                first.duration = end;
+                first.timestamp = date;
+                first.database = database_name;
+                first.query = getSupplierQuery;
                 res.status(200).json({
-                    data: resultParsed[0],
+                    data: {
+                        supplier: resultParsed[0],
+                        stats: {
+                            queries: 1,
+                            results: result_count,
+                            logs: first,
+                        },
+                    },
                     success: true,
                 });
             }

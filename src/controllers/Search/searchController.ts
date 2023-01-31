@@ -2,7 +2,6 @@
 import { RequestHandler } from 'express';
 
 import SearchFrom from '../../models/search';
-import logs from '../../models/logs';
 import * as q from '../../utils/queries';
 
 const searchController: RequestHandler = async (req, res) => {
@@ -12,6 +11,8 @@ const searchController: RequestHandler = async (req, res) => {
     const limit = 50;
     const search: any = req.query.q;
     const table = req.query.table;
+    const first: any = {};
+    const second: any = {};
     if (table === 'products' && search) {
         SearchFrom.searchProducts(search, limit)
             .then(async (result) => {
@@ -29,9 +30,20 @@ const searchController: RequestHandler = async (req, res) => {
                     const type = 'select_where';
                     const date = new Date().toISOString();
                     const database_name = 'heroku_6277cdda7c83006';
-                    await logs.save(result_count, type, date, database_name, end, searchProductsQuery);
+                    first.type = type;
+                    first.duration = end;
+                    first.timestamp = date;
+                    first.database = database_name;
+                    first.query = searchProductsQuery;
                     res.status(200).json({
-                        data: resultParsed,
+                        data: {
+                            search: resultParsed,
+                            stats: {
+                                queries: 1,
+                                results: result_count,
+                                logs: first,
+                            },
+                        },
                         success: true,
                     });
                 }
@@ -61,9 +73,20 @@ const searchController: RequestHandler = async (req, res) => {
                     const type = 'select_where';
                     const date = new Date().toISOString();
                     const database_name = 'heroku_6277cdda7c83006';
-                    await logs.save(result_count, type, date, database_name, end, searchCustomersQuery);
+                    second.type = type;
+                    second.duration = end;
+                    second.timestamp = date;
+                    second.database = database_name;
+                    second.query = searchCustomersQuery;
                     res.status(200).json({
-                        data: resultParsed,
+                        data: {
+                            search: resultParsed,
+                            stats: {
+                                queries: 1,
+                                results: result_count,
+                                logs: second,
+                            },
+                        },
                         success: true,
                     });
                 }
